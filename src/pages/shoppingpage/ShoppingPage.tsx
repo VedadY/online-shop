@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/Header/Header.tsx';
-import ProductCard from '../../components/Products/ProductCard.tsx'; // Updated file name
+import ProductCard from '../../components/Products/ProductCard.tsx';
 import SearchComponent from '../../components/Search-category/SearchComponent.tsx';
 import { useCart } from '../../context/CartContext.tsx';
 
@@ -58,6 +57,11 @@ const Shop: React.FC = () => {
     setSelectedCategory(category);
   };
 
+  const getProductQuantity = (id: number) => {
+    const item = cartItems.find(cartItem => cartItem.id === id);
+    return item ? item.quantity : 0;
+  };
+
   if (loading) {
     return <div className="text-center">Loading products...</div>;
   }
@@ -68,7 +72,7 @@ const Shop: React.FC = () => {
 
   return (
     <>
-      <Header cartCount={cartItems.length} />
+
       <br /><br /><br />
       <SearchComponent onSearch={handleSearch} onCategoryChange={handleCategoryChange} />
       <br /><br /><br />
@@ -81,7 +85,10 @@ const Shop: React.FC = () => {
               title={product.title}
               category={product.category}
               price={product.price}
+              quantity={getProductQuantity(product.id)}
               onAddToCart={() => addToCart({ ...product, quantity: 1 })}
+              onIncreaseQuantity={() => addToCart({ ...product, quantity: +1 })}
+              onDecreaseQuantity={() => addToCart({ ...product, quantity: -1 })}
             />
           </div>
         ))}

@@ -27,10 +27,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     index === existingProductIndex
                         ? { ...item, quantity: item.quantity + product.quantity }
                         : item
-                );
-            } else {
+                ).filter(item => item.quantity > 0);
+            } else if (product.quantity > 0) {
                 return [...prevItems, product];
             }
+            return prevItems;
         });
     }, []);
 

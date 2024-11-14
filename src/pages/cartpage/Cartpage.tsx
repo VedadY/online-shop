@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import { useCart } from '../../context/CartContext.tsx';
-import Header from '../../components/Header/Header.tsx';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage: React.FC = React.memo(() => {
@@ -72,7 +71,7 @@ const CartPage: React.FC = React.memo(() => {
 
     return (
         <>
-            <Header cartCount={cartItems.length} />
+            
             <div className="container mx-auto p-4">
                 <div className='flex flex-col sm:flex-row justify-between items-center mb-6'>
                     <h1 className="text-2xl font-bold mb-4 sm:mb-0">Shopping Cart</h1>
